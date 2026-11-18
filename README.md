@@ -45,44 +45,6 @@
 
 El juego utiliza un servidor dedicado autoritativo sobre `WebSocketMultiplayerPeer` ([network_manager.gd](Scripts/Core/network_manager.gd) y [match_network_sync.gd](Scripts/Core/match_network_sync.gd)), compatible con clientes Web HTTPS (`wss://` en **itch.io**) y clientes de escritorio (`ws://` o `wss://`).
 
-### 1. Despliegue en la nube gratis con Render.com (Docker)
-
-El repositorio ya incluye [Dockerfile](Dockerfile), [.dockerignore](.dockerignore), [render.yaml](render.yaml) y [server_proxy.py](server_proxy.py):
-
-1. Sube tu repositorio a GitHub.
-2. En **Render.com** -> **New +** -> **Blueprint** (o **Web Service** con entorno **Docker**, plan **Free** y **Health Check Path: `/health`**).
-3. `server_proxy.py` inicia Godot headless en `127.0.0.1:7777` y expone `0.0.0.0:$PORT` (`10000`) respondiendo `HTTP 200 OK` en `/health` y redirigiendo tráfico WebSocket hacia Godot.
-4. En el cliente (por ejemplo en itch.io), pega tu URL `wss://tu-app.onrender.com` en **SERVIDOR DEDICADO ONLINE** y pulsa **CONECTAR**.
-   - *Nota:* El cliente reintenta automáticamente durante hasta **75 s** si el servicio gratuito de Render estaba suspendido por inactividad (~50 s de arranque en frío).
-
-### 2. Ejecución local del servidor dedicado (Godot 4.6)
-
-```powershell
-Godot_v4.6-stable_win64_console.exe --headless --path . -- --server --port=7777 --room="Sala TANK.IO" --max-players=10
-```
-
-**Flags CLI y variables de entorno soportadas:**
-- `--server` / `DEDICATED_SERVER=1`: inicia en modo servidor dedicado.
-- `--port=7777` / `PORT`: puerto de escucha (`1024..65535`).
-- `--bind=*` / `BIND_ADDRESS`: dirección de escucha (`*`, `0.0.0.0`, `127.0.0.1`).
-- `--room="Nombre"` / `ROOM_NAME`: nombre de la sala (máx. 28 caracteres).
-- `--max-players=10` / `MAX_PLAYERS`: capacidad (`5..30`).
-- `--autofill` / `AUTOFILL_BOTS=true`: rellena espacios libres con bots.
-- `--auto-start` / `AUTO_START=true`: inicia la partida al llenarse la sala.
-
----
-
-## Exportación Web para itch.io
-
-El preset **Web** configurado usa exportación **Single-threaded** (`variant/thread_support=false`) para funcionar directamente en el navegador sin requerir cabeceras `SharedArrayBuffer`:
-
-```powershell
-Godot_v4.6-stable_win64_console.exe --headless --path . --export-release "Web" "build_web/index.html"
-```
-
-*(Comprime el contenido de `build_web/` en un `.zip` con `index.html` en la raíz para subirlo a itch.io).*
-
----
 
 ## Pruebas automatizadas
 
