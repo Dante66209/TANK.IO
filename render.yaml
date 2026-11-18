@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: tank-io-server
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: ROOM_NAME
+        value: Arena Online TANK.IO
+      - key: MAX_PLAYERS
+        value: "10"
+      - key: AUTOFILL_BOTS
+        value: "false"
+      - key: AUTO_START
+        value: "false"

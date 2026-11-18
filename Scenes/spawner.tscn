@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx1034fr7jbl5"]
+
+[ext_resource type="Script" uid="uid://5h4fy42etqfw" path="res://Scripts/spawner.gd" id="1_ttk4a"]
+[ext_resource type="PackedScene" uid="uid://i8p83ghop788" path="res://Scenes/cell.tscn" id="2_mcln3"]
+[ext_resource type="PackedScene" uid="uid://bpkurseq6mgna" path="res://Scenes/enemy.tscn" id="3_enemy"]
+
+[node name="Spawner" type="Node"]
+script = ExtResource("1_ttk4a")
+cell = ExtResource("2_mcln3")
+enemy_scene = ExtResource("3_enemy")
+count = 150
+max_enemies = 4
+arena_size = Vector2(2500, 2500)

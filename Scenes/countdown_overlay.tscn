@@ -1,0 +1,167 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/countdown_overlay.gd" id="1_countdown_script"]
+[ext_resource type="Script" path="res://Scripts/UI/controls_diagram_canvas.gd" id="2_diagram_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+bg_color = Color(0.11, 0.13, 0.16, 0.68)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.84, 0.9, 0.72)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 18.0
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pill"]
+bg_color = Color(0.18, 0.2, 0.24, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.75, 0.8, 0.86, 0.65)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+content_margin_left = 14.0
+content_margin_top = 4.0
+content_margin_right = 14.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.08, 0.1, 0.12, 0.72)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_fill"]
+bg_color = Color(0.95, 0.86, 0.3, 0.92)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="CountdownOverlay" type="CanvasLayer"]
+layer = 102
+visible = false
+script = ExtResource("1_countdown_script")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GrayScreen" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.2, 0.22, 0.25, 0.68)
+
+[node name="CenterPanel" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ControlsCard" type="PanelContainer" parent="Root/CenterPanel"]
+custom_minimum_size = Vector2(972, 595)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Root/CenterPanel/ControlsCard"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="TopHeader" type="HBoxContainer" parent="Root/CenterPanel/ControlsCard/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="TitleVBox" type="VBoxContainer" parent="Root/CenterPanel/ControlsCard/VBox/TopHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="HowToTitle" type="Label" parent="Root/CenterPanel/ControlsCard/VBox/TopHeader/TitleVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.98, 1, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.06, 0.08, 0.95)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 34
+text = "CÓMO JUGAR"
+
+[node name="StatusLabel" type="Label" parent="Root/CenterPanel/ControlsCard/VBox/TopHeader/TitleVBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.88, 0.91, 0.95, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_pill")
+text = "DESPLIEGUE EN ARENA • JUGADORES INMÓVILES"
+
+[node name="TimerBox" type="VBoxContainer" parent="Root/CenterPanel/ControlsCard/VBox/TopHeader"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="Root/CenterPanel/ControlsCard/VBox/TopHeader/TimerBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.91, 0.95, 0.92)
+theme_override_font_sizes/font_size = 12
+text = "INICIANDO EN..."
+horizontal_alignment = 1
+
+[node name="CountdownLabel" type="Label" parent="Root/CenterPanel/ControlsCard/VBox/TopHeader/TimerBox"]
+custom_minimum_size = Vector2(220, 62)
+layout_mode = 2
+pivot_offset = Vector2(110, 31)
+theme_override_colors/font_color = Color(0.95, 0.97, 1, 1)
+theme_override_colors/font_outline_color = Color(0.03, 0.04, 0.06, 0.98)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountdownBar" type="ProgressBar" parent="Root/CenterPanel/ControlsCard/VBox"]
+custom_minimum_size = Vector2(0, 7)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
+max_value = 15.0
+value = 15.0
+show_percentage = false
+
+[node name="ControlsDiagram" type="Control" parent="Root/CenterPanel/ControlsCard/VBox"]
+custom_minimum_size = Vector2(920, 445)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("2_diagram_script")

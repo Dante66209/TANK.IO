@@ -1,0 +1,236 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/pause_menu.gd" id="1_pause_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.07, 0.09, 0.14, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.76, 0.95, 0.88)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+shadow_color = Color(0, 0, 0, 0.72)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_primary"]
+bg_color = Color(0.14, 0.48, 0.72, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.4, 0.85, 1, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_warn"]
+bg_color = Color(0.28, 0.22, 0.14, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.95, 0.7, 0.25, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_danger"]
+bg_color = Color(0.45, 0.14, 0.16, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.95, 0.35, 0.35, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 110
+visible = false
+script = ExtResource("1_pause_script")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.05, 0.72)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "MENÚ DE PAUSA"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.82, 0.9, 0.9)
+theme_override_font_sizes/font_size = 12
+text = "Ajusta el audio de la partida o regresa al menú principal"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+
+[node name="VolumeGrid" type="GridContainer" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
+
+[node name="MasterLabel" type="Label" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Volumen General"
+
+[node name="MasterSlider" type="HSlider" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(170, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 100.0
+value = 85.0
+
+[node name="MasterValue" type="Label" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "85%"
+horizontal_alignment = 2
+
+[node name="MasterMute" type="CheckBox" parent="Root/Center/Panel/VBox/VolumeGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Mute"
+
+[node name="SFXLabel" type="Label" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Efectos (SFX)"
+
+[node name="SFXSlider" type="HSlider" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(170, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 100.0
+value = 85.0
+
+[node name="SFXValue" type="Label" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "85%"
+horizontal_alignment = 2
+
+[node name="SFXMute" type="CheckBox" parent="Root/Center/Panel/VBox/VolumeGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Mute"
+
+[node name="MusicLabel" type="Label" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Música"
+
+[node name="MusicSlider" type="HSlider" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(170, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 100.0
+value = 80.0
+
+[node name="MusicValue" type="Label" parent="Root/Center/Panel/VBox/VolumeGrid"]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "80%"
+horizontal_alignment = 2
+
+[node name="MusicMute" type="CheckBox" parent="Root/Center/Panel/VBox/VolumeGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Mute"
+
+[node name="TestSFXButton" type="Button" parent="Root/Center/Panel/VBox"]
+custom_minimum_size = Vector2(180, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 13
+text = "Probar Efecto de Sonido"
+
+[node name="HSeparator2" type="HSeparator" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="Root/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ResumeButton" type="Button" parent="Root/Center/Panel/VBox/ButtonsVBox"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_primary")
+text = "REANUDAR PARTIDA (ESC)"
+
+[node name="MainMenuButton" type="Button" parent="Root/Center/Panel/VBox/ButtonsVBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_warn")
+text = "SALIR AL MENÚ PRINCIPAL"
+
+[node name="QuitButton" type="Button" parent="Root/Center/Panel/VBox/ButtonsVBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_danger")
+text = "SALIR DEL JUEGO"

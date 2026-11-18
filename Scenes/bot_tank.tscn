@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/tank.tscn" id="1_tank_base"]
+[ext_resource type="Script" path="res://Scripts/Entities/bot_tank.gd" id="2_bot_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bot_sight"]
+radius = 420.0
+
+[node name="BotTank" instance=ExtResource("1_tank_base")]
+script = ExtResource("2_bot_script")
+tank_name = "BotTank"
+is_player = false
+sight_radius = 420.0
+
+[node name="CollisionShape2D" parent="SightArea2D" index="0"]
+shape = SubResource("CircleShape2D_bot_sight")
+
+[node name="AimRayCast2D" type="RayCast2D" parent="." index="6"]
+target_position = Vector2(420, 0)
+collision_mask = 3
+
+[node name="Whiskers" type="Node2D" parent="." index="7"]
+
+[node name="Whisker_M45" type="RayCast2D" parent="Whiskers" index="0"]
+target_position = Vector2(49.4975, -49.4975)
+collision_mask = 3
+
+[node name="Whisker_M20" type="RayCast2D" parent="Whiskers" index="1"]
+target_position = Vector2(65.7785, -23.9414)
+collision_mask = 3
+
+[node name="Whisker_0" type="RayCast2D" parent="Whiskers" index="2"]
+target_position = Vector2(70, 0)
+collision_mask = 3
+
+[node name="Whisker_P20" type="RayCast2D" parent="Whiskers" index="3"]
+target_position = Vector2(65.7785, 23.9414)
+collision_mask = 3
+
+[node name="Whisker_P45" type="RayCast2D" parent="Whiskers" index="4"]
+target_position = Vector2(49.4975, 49.4975)
+collision_mask = 3

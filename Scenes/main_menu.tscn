@@ -1,0 +1,286 @@
+[gd_scene format=3 uid="uid://digecr58jnruw"]
+
+[ext_resource type="Script" uid="uid://vtx83b77kgy2" path="res://Scripts/UI/main_menu.gd" id="1_main_menu_script"]
+[ext_resource type="PackedScene" path="res://Scenes/match_browser_panel.tscn" id="2_browser_panel"]
+[ext_resource type="PackedScene" path="res://Scenes/settings_panel.tscn" id="3_settings_panel"]
+[ext_resource type="PackedScene" path="res://Scenes/credits_panel.tscn" id="4_credits_panel"]
+[ext_resource type="Script" uid="uid://drbkg18dol02" path="res://Scripts/UI/tank_preview_widget.gd" id="5_preview_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_home_card"]
+content_margin_left = 32.0
+content_margin_top = 28.0
+content_margin_right = 32.0
+content_margin_bottom = 28.0
+bg_color = Color(0.07, 0.1, 0.15, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.28, 0.78, 0.96, 0.85)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+content_margin_left = 16.0
+content_margin_top = 5.0
+content_margin_right = 16.0
+content_margin_bottom = 5.0
+bg_color = Color(0.11, 0.16, 0.24, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.84, 0.25, 0.65)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_play"]
+bg_color = Color(0.14, 0.5, 0.78, 0.96)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.42, 0.88, 1, 0.95)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_secondary"]
+bg_color = Color(0.13, 0.18, 0.26, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.38, 0.62, 0.82, 0.78)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_quit"]
+bg_color = Color(0.4, 0.14, 0.17, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.92, 0.36, 0.38, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_customizer_card"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.07, 0.1, 0.15, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.82, 0.25, 0.8)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview_frame"]
+bg_color = Color(0.05, 0.07, 0.1, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.55, 0.75, 0.75)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MainMenu" type="Control" unique_id=1746852632]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main_menu_script")
+
+[node name="BackdropCanvas" type="Control" parent="." unique_id=1521501280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HomeCenter" type="CenterContainer" parent="." unique_id=1111817267]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HomeLayout" type="HBoxContainer" parent="HomeCenter" unique_id=2041492090]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="HomeCenter/HomeLayout" unique_id=1717621064]
+custom_minimum_size = Vector2(490, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_home_card")
+
+[node name="VBox" type="VBoxContainer" parent="HomeCenter/HomeLayout/Panel" unique_id=65632035]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="HomeCenter/HomeLayout/Panel/VBox" unique_id=564917224]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.04, 0.07, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 54
+text = "TANK.IO"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="HomeCenter/HomeLayout/Panel/VBox" unique_id=496035176]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.9, 0.96, 0.92)
+theme_override_font_sizes/font_size = 15
+text = "ARENA DE COMBATE TÁCTICO • BATTLE ROYALE"
+horizontal_alignment = 1
+
+[node name="PilotBadge" type="Label" parent="HomeCenter/HomeLayout/Panel/VBox" unique_id=830910386]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.86, 0.3, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_badge")
+text = "PILOTO ACTUAL: PLAYER "
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HomeCenter/HomeLayout/Panel/VBox" unique_id=1621746187]
+layout_mode = 2
+
+[node name="Buttons" type="VBoxContainer" parent="HomeCenter/HomeLayout/Panel/VBox" unique_id=1789905365]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FindMatchButton" type="Button" parent="HomeCenter/HomeLayout/Panel/VBox/Buttons" unique_id=1954857508]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_play")
+text = "BUSCAR PARTIDA"
+
+[node name="SettingsButton" type="Button" parent="HomeCenter/HomeLayout/Panel/VBox/Buttons" unique_id=1908658928]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
+text = "CONFIGURACIÓN"
+
+[node name="CreditsButton" type="Button" parent="HomeCenter/HomeLayout/Panel/VBox/Buttons" unique_id=1257824363]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_secondary")
+text = "CRÉDITOS"
+
+[node name="QuitButton" type="Button" parent="HomeCenter/HomeLayout/Panel/VBox/Buttons" unique_id=620329955]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_quit")
+text = "SALIR"
+
+[node name="CustomizerPanel" type="PanelContainer" parent="HomeCenter/HomeLayout" unique_id=1189030409]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_customizer_card")
+
+[node name="VBox" type="VBoxContainer" parent="HomeCenter/HomeLayout/CustomizerPanel" unique_id=1925532006]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CustomizerTitle" type="Label" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=1305732674]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.3, 1)
+theme_override_font_sizes/font_size = 20
+text = "PERSONALIZAR TANQUE"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=1190092900]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=1045031810]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 14
+text = "Nombre del Tanque:"
+
+[node name="TankNameInput" type="LineEdit" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=772650811]
+layout_mode = 2
+text = "Player"
+placeholder_text = "Escribe tu nombre..."
+max_length = 18
+
+[node name="ColorLabel" type="Label" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=1397500917]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.92, 0.98, 1)
+theme_override_font_sizes/font_size = 14
+text = "Color del Tanque:"
+
+[node name="ColorSwatchesGrid" type="GridContainer" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=285251605]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="SelectedColorLabel" type="Label" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=1869284147]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.85, 0.95, 0.95)
+theme_override_font_sizes/font_size = 12
+text = "Color seleccionado: Azul Táctico"
+horizontal_alignment = 1
+
+[node name="PreviewTitle" type="Label" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=1859555093]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "VISTA PREVIA"
+horizontal_alignment = 1
+
+[node name="PreviewFrame" type="PanelContainer" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox" unique_id=522583252]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview_frame")
+
+[node name="TankPreview" type="Control" parent="HomeCenter/HomeLayout/CustomizerPanel/VBox/PreviewFrame" unique_id=1946927774]
+custom_minimum_size = Vector2(338, 175)
+layout_mode = 2
+script = ExtResource("5_preview_script")
+
+[node name="MatchBrowserPanel" parent="." unique_id=663069253 instance=ExtResource("2_browser_panel")]
+visible = false
+layout_mode = 1
+
+[node name="SettingsPanel" parent="." unique_id=1072791043 instance=ExtResource("3_settings_panel")]
+visible = false
+layout_mode = 1
+
+[node name="CreditsPanel" parent="." unique_id=1196791649 instance=ExtResource("4_credits_panel")]
+visible = false
+layout_mode = 1

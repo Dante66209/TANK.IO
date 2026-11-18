@@ -1,0 +1,253 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/podium_screen.gd" id="1_podium_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_podium"]
+bg_color = Color(0.1, 0.12, 0.16, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.7, 0.2, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 12
+
+[node name="PodiumScreen" type="CanvasLayer"]
+layer = 105
+visible = false
+script = ExtResource("1_podium_script")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DarkOverlay" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Panel" type="PanelContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -375.0
+offset_right = 360.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_podium")
+
+[node name="VBox" type="VBoxContainer" parent="Root/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.3, 1)
+theme_override_font_sizes/font_size = 22
+text = "MATCH COMPLETED - FINAL PODIUM"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="Root/Panel/VBox"]
+layout_mode = 2
+
+[node name="PodiumHBox" type="HBoxContainer" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SecondPlace" type="VBoxContainer" parent="Root/Panel/VBox/PodiumHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Medal" type="Label" parent="Root/Panel/VBox/PodiumHBox/SecondPlace"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 20
+text = "2nd (SILVER)"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="Root/Panel/VBox/PodiumHBox/SecondPlace"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "---"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Root/Panel/VBox/PodiumHBox/SecondPlace"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.8, 1)
+theme_override_font_sizes/font_size = 13
+text = "0 pts"
+horizontal_alignment = 1
+
+[node name="FirstPlace" type="VBoxContainer" parent="Root/Panel/VBox/PodiumHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CrownIcon" type="TextureRect" parent="Root/Panel/VBox/PodiumHBox/FirstPlace"]
+modulate = Color(1, 0.84, 0.1, 1)
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Medal" type="Label" parent="Root/Panel/VBox/PodiumHBox/FirstPlace"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "1st (GOLD)"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="Root/Panel/VBox/PodiumHBox/FirstPlace"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "---"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Root/Panel/VBox/PodiumHBox/FirstPlace"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 15
+text = "0 pts"
+horizontal_alignment = 1
+
+[node name="ThirdPlace" type="VBoxContainer" parent="Root/Panel/VBox/PodiumHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Medal" type="Label" parent="Root/Panel/VBox/PodiumHBox/ThirdPlace"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.5, 0.25, 1)
+theme_override_font_sizes/font_size = 20
+text = "3rd (BRONZE)"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="Root/Panel/VBox/PodiumHBox/ThirdPlace"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "---"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Root/Panel/VBox/PodiumHBox/ThirdPlace"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.55, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "0 pts"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Root/Panel/VBox"]
+layout_mode = 2
+
+[node name="PerformanceTitle" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.9, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "YOUR MATCH PERFORMANCE"
+horizontal_alignment = 1
+
+[node name="StatsContainer" type="GridContainer" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 4
+columns = 4
+
+[node name="RankTitle" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Final Rank:"
+
+[node name="RankValue" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "#1"
+
+[node name="ScoreTitle" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Final Score:"
+
+[node name="ScoreValue" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="KillsTitle" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Tanks Eliminated:"
+
+[node name="KillsValue" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="DeathsTitle" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Times Destroyed:"
+
+[node name="DeathsValue" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="BarrelKillsTitle" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Barrel Kills:"
+
+[node name="BarrelKillsValue" type="Label" parent="Root/Panel/VBox/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "0"
+
+[node name="HSeparator3" type="HSeparator" parent="Root/Panel/VBox"]
+layout_mode = 2
+
+[node name="LeaderboardTitle" type="Label" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 15
+text = "TABLA DE POSICIONES FINAL (LEADERBOARD)"
+horizontal_alignment = 1
+
+[node name="LeaderboardTable" type="VBoxContainer" parent="Root/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="HSeparator4" type="HSeparator" parent="Root/Panel/VBox"]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="Root/Panel/VBox"]
+custom_minimum_size = Vector2(240, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 15
+text = "PLAY AGAIN / RESTART"
+
+[node name="BackToMenuButton" type="Button" parent="Root/Panel/VBox"]
+custom_minimum_size = Vector2(240, 34)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 13
+text = "VOLVER AL MENÚ PRINCIPAL"

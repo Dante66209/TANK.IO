@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/tank.tscn" id="1_tank_base"]
+[ext_resource type="Script" path="res://Scripts/Entities/player_tank.gd" id="2_player_script"]
+
+[node name="PlayerTank" instance=ExtResource("1_tank_base")]
+script = ExtResource("2_player_script")
+is_player = true
+tank_name = "Player"
+
+[node name="Camera2D" type="Camera2D" parent="." index="6"]
+position_smoothing_enabled = true
+limit_left = -3250
+limit_top = -3250
+limit_right = 3250
+limit_bottom = 3250

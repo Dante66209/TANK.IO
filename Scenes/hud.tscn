@@ -1,0 +1,642 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="1_hud_script"]
+[ext_resource type="Script" path="res://Scripts/UI/minimap.gd" id="2_minimap_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.08, 0.1, 0.14, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.35, 0.5, 0.78)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_card"]
+bg_color = Color(0.06, 0.08, 0.12, 0.88)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.72, 0.92, 0.85)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.38)
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.035, 0.045, 0.07, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.27, 0.38, 0.75)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_medal"]
+bg_color = Color(0.07, 0.08, 0.12, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.82, 0.2, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp"]
+bg_color = Color(0.18, 0.88, 0.34, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shield"]
+bg_color = Color(0.18, 0.76, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dash"]
+bg_color = Color(1, 0.65, 0.12, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ammo"]
+bg_color = Color(0.98, 0.82, 0.22, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mortar"]
+bg_color = Color(0.95, 0.22, 0.15, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="HUD" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_hud_script")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopLeft" type="MarginContainer" parent="Root"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 180.0
+offset_bottom = 194.0
+mouse_filter = 2
+
+[node name="MinimapPanel" type="PanelContainer" parent="Root/TopLeft"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Root/TopLeft/MinimapPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="RadarTitle" type="Label" parent="Root/TopLeft/MinimapPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.92, 0.85, 1)
+theme_override_font_sizes/font_size = 10
+text = "RADAR TÁCTICO"
+horizontal_alignment = 1
+
+[node name="TacticalMinimap" type="Control" parent="Root/TopLeft/MinimapPanel/VBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_minimap_script")
+
+[node name="TopCenter" type="VBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -165.0
+offset_top = 14.0
+offset_right = 165.0
+offset_bottom = 105.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="TimerLabel" type="Label" parent="Root/TopCenter"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "03:00"
+horizontal_alignment = 1
+
+[node name="SuddenDeathLabel" type="Label" parent="Root/TopCenter"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.25, 0.38, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 13
+text = "¡ZONA CERRÁNDOSE! SIN RESPAWNS"
+horizontal_alignment = 1
+
+[node name="MortarContainer" type="VBoxContainer" parent="Root/TopCenter"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="MortarAlertRow" type="HBoxContainer" parent="Root/TopCenter/MortarContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="MortarIcon" type="TextureRect" parent="Root/TopCenter/MortarContainer/MortarAlertRow"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MortarAlertLabel" type="Label" parent="Root/TopCenter/MortarContainer/MortarAlertRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.28, 0.22, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "¡ALERTA DE MORTEROS! (25.0s)"
+horizontal_alignment = 1
+
+[node name="MortarBar" type="ProgressBar" parent="Root/TopCenter/MortarContainer"]
+custom_minimum_size = Vector2(260, 8)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_mortar")
+max_value = 25.0
+value = 25.0
+show_percentage = false
+
+[node name="KillstreakBanner" type="PanelContainer" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_top = 112.0
+offset_right = 220.0
+offset_bottom = 176.0
+grow_horizontal = 2
+pivot_offset = Vector2(220, 32)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_medal")
+
+[node name="VBox" type="VBoxContainer" parent="Root/KillstreakBanner"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 1
+alignment = 1
+
+[node name="MedalTitle" type="Label" parent="Root/KillstreakBanner/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.04, 0.06, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 22
+text = "¡DOBLE BAJA!"
+horizontal_alignment = 1
+
+[node name="MedalSubtitle" type="Label" parent="Root/KillstreakBanner/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.95, 1, 0.95)
+theme_override_font_sizes/font_size = 11
+text = "RACHA DE COMBATE"
+horizontal_alignment = 1
+
+[node name="TopRight" type="MarginContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 200.0
+grow_horizontal = 0
+
+[node name="LeaderboardPanel" type="PanelContainer" parent="Root/TopRight"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Root/TopRight/LeaderboardPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Root/TopRight/LeaderboardPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 12
+text = "LEADERBOARD (TOP 5)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Root/TopRight/LeaderboardPanel/VBox"]
+layout_mode = 2
+
+[node name="LeaderboardList" type="VBoxContainer" parent="Root/TopRight/LeaderboardPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="BottomLeftCard" type="Panel" parent="Root"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -238.0
+offset_right = 398.0
+offset_bottom = -12.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud_card")
+
+[node name="BottomLeft" type="VBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -280.0
+offset_right = 386.0
+offset_bottom = -22.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="StreakBadge" type="Label" parent="Root/BottomLeft"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.15, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+text = "STREAK x3!"
+
+[node name="ScoreLabel" type="Label" parent="Root/BottomLeft"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.98, 1, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "SCORE: 0"
+
+[node name="HPContainer" type="HBoxContainer" parent="Root/BottomLeft"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Root/BottomLeft/HPContainer"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 1, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "VIDA"
+
+[node name="HPBar" type="ProgressBar" parent="Root/BottomLeft/HPContainer"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp")
+value = 100.0
+show_percentage = false
+
+[node name="HPText" type="Label" parent="Root/BottomLeft/HPContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "100 / 100"
+horizontal_alignment = 2
+
+[node name="ShieldContainer" type="HBoxContainer" parent="Root/BottomLeft"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Root/BottomLeft/ShieldContainer"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.92, 1, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "ESCUDO"
+
+[node name="ShieldBar" type="ProgressBar" parent="Root/BottomLeft/ShieldContainer"]
+custom_minimum_size = Vector2(150, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_shield")
+value = 50.0
+show_percentage = false
+
+[node name="ShieldText" type="Label" parent="Root/BottomLeft/ShieldContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "0 / 50"
+horizontal_alignment = 2
+
+[node name="DashContainer" type="HBoxContainer" parent="Root/BottomLeft"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Root/BottomLeft/DashContainer"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.68, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "DASH"
+
+[node name="DashBar" type="ProgressBar" parent="Root/BottomLeft/DashContainer"]
+custom_minimum_size = Vector2(150, 16)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dash")
+value = 100.0
+show_percentage = false
+
+[node name="DashText" type="Label" parent="Root/BottomLeft/DashContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "100%"
+horizontal_alignment = 2
+
+[node name="MunitionsSeparator" type="HSeparator" parent="Root/BottomLeft"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="AmmoContainer" type="HBoxContainer" parent="Root/BottomLeft"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Root/BottomLeft/AmmoContainer"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "BALAS"
+
+[node name="AmmoBar" type="ProgressBar" parent="Root/BottomLeft/AmmoContainer"]
+custom_minimum_size = Vector2(150, 15)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ammo")
+value = 100.0
+show_percentage = false
+
+[node name="AmmoIcon" type="TextureRect" parent="Root/BottomLeft/AmmoContainer"]
+visible = false
+custom_minimum_size = Vector2(14, 14)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AmmoText" type="Label" parent="Root/BottomLeft/AmmoContainer"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.94, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "LISTO"
+horizontal_alignment = 2
+
+[node name="MineContainer" type="HBoxContainer" parent="Root/BottomLeft"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Root/BottomLeft/MineContainer"]
+custom_minimum_size = Vector2(86, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.95, 1, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "MINAS [Q]"
+
+[node name="MinePipsLabel" type="Label" parent="Root/BottomLeft/MineContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 16
+text = "[+]   [+]   [+]"
+horizontal_alignment = 1
+
+[node name="MinePipsIcons" type="HBoxContainer" parent="Root/BottomLeft/MineContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="MinePip1" type="TextureRect" parent="Root/BottomLeft/MineContainer/MinePipsIcons"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MinePip2" type="TextureRect" parent="Root/BottomLeft/MineContainer/MinePipsIcons"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MinePip3" type="TextureRect" parent="Root/BottomLeft/MineContainer/MinePipsIcons"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MineCountLabel" type="Label" parent="Root/BottomLeft/MineContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 13
+text = "3 / 3"
+horizontal_alignment = 2
+
+[node name="BottomCenter" type="VBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -235.0
+offset_top = -150.0
+offset_right = 235.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="SpectatorBanner" type="PanelContainer" parent="Root/BottomCenter"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hud_card")
+
+[node name="HBox" type="HBoxContainer" parent="Root/BottomCenter/SpectatorBanner"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="PrevSpectateBtn" type="Button" parent="Root/BottomCenter/SpectatorBanner/HBox"]
+custom_minimum_size = Vector2(72, 34)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+text = "[A]"
+
+[node name="SpectatorEyeIcon" type="TextureRect" parent="Root/BottomCenter/SpectatorBanner/HBox"]
+modulate = Color(0.35, 0.94, 1, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InfoVBox" type="VBoxContainer" parent="Root/BottomCenter/SpectatorBanner/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="SpectatorTitle" type="Label" parent="Root/BottomCenter/SpectatorBanner/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.94, 1, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 15
+text = "ESPECTANDO: BOT ALPHA (1/4)"
+horizontal_alignment = 1
+
+[node name="SpectatorHint" type="Label" parent="Root/BottomCenter/SpectatorBanner/HBox/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.88, 0.96, 0.92)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 11
+text = "A / D  •  CLIC IZQ / DER PARA CAMBIAR"
+horizontal_alignment = 1
+
+[node name="NextSpectateBtn" type="Button" parent="Root/BottomCenter/SpectatorBanner/HBox"]
+custom_minimum_size = Vector2(72, 34)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 13
+text = "[D]"
+icon_alignment = 2
+
+[node name="PowerUpPanel" type="PanelContainer" parent="Root/BottomCenter"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(270, 0)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="HBox" type="HBoxContainer" parent="Root/BottomCenter/PowerUpPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PowerUpName" type="Label" parent="Root/BottomCenter/PowerUpPanel/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_colors/font_outline_color = Color(0.04, 0.05, 0.08, 0.95)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 14
+text = "RAPID FIRE"
+
+[node name="DurationBar" type="ProgressBar" parent="Root/BottomCenter/PowerUpPanel/HBox"]
+custom_minimum_size = Vector2(110, 12)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+value = 100.0
+show_percentage = false
+
+[node name="MidLeft" type="VBoxContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -430.0
+offset_right = 540.0
+offset_bottom = -268.0
+grow_vertical = 0
+mouse_filter = 2
+alignment = 2
+
+[node name="KillFeedList" type="VBoxContainer" parent="Root/MidLeft"]
+layout_mode = 2
+theme_override_constants/separation = 4

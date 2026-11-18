@@ -1,0 +1,418 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/match_browser_panel.gd" id="1_browser_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.06, 0.09, 0.13, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.78, 0.96, 0.88)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 26.0
+content_margin_top = 20.0
+content_margin_right = 26.0
+content_margin_bottom = 20.0
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_subcard"]
+bg_color = Color(0.09, 0.12, 0.17, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.42, 0.58, 0.78)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_green"]
+bg_color = Color(0.14, 0.52, 0.28, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.36, 0.96, 0.56, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_blue"]
+bg_color = Color(0.14, 0.46, 0.72, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.42, 0.86, 1, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="MatchBrowserPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_browser_script")
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(980, 620)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="HBoxContainer" parent="Center/Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Center/Panel/VBox/HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.45, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "BUSCAR PARTIDA — SALAS Y MODO LOCAL"
+
+[node name="BackToMenuButton" type="Button" parent="Center/Panel/VBox/HeaderBar"]
+custom_minimum_size = Vector2(150, 36)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "VOLVER AL MENÚ"
+
+[node name="HSeparator" type="HSeparator" parent="Center/Panel/VBox"]
+layout_mode = 2
+
+[node name="BrowseView" type="VBoxContainer" parent="Center/Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Columns" type="HBoxContainer" parent="Center/Panel/VBox/BrowseView"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="ServerColumn" type="VBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.35
+theme_override_constants/separation = 10
+
+[node name="RoomsHeader" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "SALAS DISPONIBLES"
+
+[node name="ServerStatusRow" type="HBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ServerStatusIcon" type="TextureRect" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/ServerStatusRow"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ServerStatusLabel" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/ServerStatusRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.62, 0.85, 0.96, 0.95)
+theme_override_font_sizes/font_size = 12
+text = "Conéctate a un Servidor Dedicado WebSocket o elige una sala local con Bots (5–30)."
+autowrap_mode = 2
+
+[node name="OnlineServerBox" type="PanelContainer" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_subcard")
+
+[node name="OnlineVBox" type="VBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/OnlineServerBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="OnlineTitleLabel" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/OnlineServerBox/OnlineVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "SERVIDOR DEDICADO ONLINE (WEB / ITCH.IO)"
+
+[node name="ServerUrlRow" type="HBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/OnlineServerBox/OnlineVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ServerUrlInput" type="LineEdit" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/OnlineServerBox/OnlineVBox/ServerUrlRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ws://127.0.0.1:7777"
+placeholder_text = "wss://tu-servidor.onrender.com  o  ws://127.0.0.1:7777"
+
+[node name="ConnectServerButton" type="Button" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/OnlineServerBox/OnlineVBox/ServerUrlRow"]
+custom_minimum_size = Vector2(126, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_blue")
+text = "CONECTAR"
+
+[node name="OnlineHintLabel" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/OnlineServerBox/OnlineVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.78, 0.88, 0.88)
+theme_override_font_sizes/font_size = 11
+text = "En itch.io pega la URL wss:// de tu servidor en Render. Si estuvo inactivo, puede tardar ~50s en despertar."
+autowrap_mode = 2
+
+[node name="RoomsScroll" type="ScrollContainer" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RoomsList" type="VBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns/ServerColumn/RoomsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="VSeparator" type="VSeparator" parent="Center/Panel/VBox/BrowseView/Columns"]
+layout_mode = 2
+
+[node name="CreateColumn" type="VBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="CreateHeader" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.96, 0.62, 1)
+theme_override_font_sizes/font_size = 16
+text = "CREAR PARTIDA LOCAL (CON BOTS)"
+
+[node name="CreateDesc" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.86, 0.92, 0.92)
+theme_override_font_sizes/font_size = 13
+text = "Juega contra bots autónomos en la arena de 6400x6400. La sala espera a un mínimo de 5 participantes y se puede ampliar hasta 30."
+autowrap_mode = 2
+
+[node name="RoomNameLabel" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+text = "Nombre de la Sala:"
+
+[node name="RoomNameInput" type="LineEdit" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+text = "Arena Local TANK.IO"
+placeholder_text = "Nombre de sala"
+max_length = 28
+
+[node name="CapLabel" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+text = "Capacidad Máxima (5 a 30 jugadores):"
+
+[node name="CapRow" type="HBoxContainer" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CreateCapSlider" type="HSlider" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn/CapRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 5.0
+max_value = 30.0
+value = 10.0
+
+[node name="CreateCapSpin" type="SpinBox" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn/CapRow"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+min_value = 5.0
+max_value = 30.0
+value = 10.0
+
+[node name="CreateCapInfo" type="Label" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 12
+text = "Capacidad: 10 jugadores (1 Tú + 9 Bots) • Mínimo para iniciar: 5"
+
+[node name="CreateAutoFillCheck" type="CheckBox" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+button_pressed = true
+text = "Llenar sala progresivamente con Bots al entrar"
+
+[node name="Spacer" type="Control" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreateLocalButton" type="Button" parent="Center/Panel/VBox/BrowseView/Columns/CreateColumn"]
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_green")
+text = "CREAR SALA LOCAL Y ENTRAR"
+
+[node name="LobbyView" type="VBoxContainer" parent="Center/Panel/VBox"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="LobbyTop" type="HBoxContainer" parent="Center/Panel/VBox/LobbyView"]
+layout_mode = 2
+
+[node name="LobbyTitle" type="Label" parent="Center/Panel/VBox/LobbyView/LobbyTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "Arena Local TANK.IO"
+
+[node name="LobbyModeBadge" type="Label" parent="Center/Panel/VBox/LobbyView/LobbyTop"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "MODO: LOCAL CON BOTS (PRE-SERVIDOR)"
+
+[node name="StatusCard" type="PanelContainer" parent="Center/Panel/VBox/LobbyView"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_subcard")
+
+[node name="StatusVBox" type="VBoxContainer" parent="Center/Panel/VBox/LobbyView/StatusCard"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TopStatusRow" type="HBoxContainer" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ConnectedCountLabel" type="Label" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox/TopStatusRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.98, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "CONECTADOS: 1 / 10"
+
+[node name="MinStatusIcon" type="TextureRect" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox/TopStatusRow"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MinStatusLabel" type="Label" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox/TopStatusRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.28, 1)
+theme_override_font_sizes/font_size = 14
+text = "ESPERANDO JUGADORES... (1/5 mínimo)"
+
+[node name="MinProgressBar" type="ProgressBar" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+max_value = 5.0
+value = 1.0
+show_percentage = false
+
+[node name="CapEditRow" type="HBoxContainer" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CapEditLabel" type="Label" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox/CapEditRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Modificar Capacidad Máxima de la Sala (5 – 30):"
+
+[node name="LobbyCapSlider" type="HSlider" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox/CapEditRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 5.0
+max_value = 30.0
+value = 10.0
+
+[node name="LobbyCapSpin" type="SpinBox" parent="Center/Panel/VBox/LobbyView/StatusCard/StatusVBox/CapEditRow"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+min_value = 5.0
+max_value = 30.0
+value = 10.0
+
+[node name="RosterTitle" type="Label" parent="Center/Panel/VBox/LobbyView"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.85, 0.98, 1)
+theme_override_font_sizes/font_size = 13
+text = "JUGADORES CONECTADOS EN LA SALA:"
+
+[node name="RosterScroll" type="ScrollContainer" parent="Center/Panel/VBox/LobbyView"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RosterList" type="VBoxContainer" parent="Center/Panel/VBox/LobbyView/RosterScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="BotControlsRow" type="HBoxContainer" parent="Center/Panel/VBox/LobbyView"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AddBotButton" type="Button" parent="Center/Panel/VBox/LobbyView/BotControlsRow"]
+custom_minimum_size = Vector2(115, 34)
+layout_mode = 2
+text = "+ Añadir Bot"
+
+[node name="RemoveBotButton" type="Button" parent="Center/Panel/VBox/LobbyView/BotControlsRow"]
+custom_minimum_size = Vector2(115, 34)
+layout_mode = 2
+text = "- Quitar Bot"
+
+[node name="FillRoomButton" type="Button" parent="Center/Panel/VBox/LobbyView/BotControlsRow"]
+custom_minimum_size = Vector2(130, 34)
+layout_mode = 2
+text = "Llenar Sala"
+
+[node name="LobbyAutoFillCheck" type="CheckBox" parent="Center/Panel/VBox/LobbyView/BotControlsRow"]
+layout_mode = 2
+button_pressed = true
+text = "Auto-llenar Bots"
+
+[node name="AutoStartCheck" type="CheckBox" parent="Center/Panel/VBox/LobbyView/BotControlsRow"]
+layout_mode = 2
+text = "Auto-iniciar al llenar"
+
+[node name="LobbyFooter" type="HBoxContainer" parent="Center/Panel/VBox/LobbyView"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LeaveLobbyButton" type="Button" parent="Center/Panel/VBox/LobbyView/LobbyFooter"]
+custom_minimum_size = Vector2(180, 44)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "SALIR DE LA SALA"
+
+[node name="StartMatchButton" type="Button" parent="Center/Panel/VBox/LobbyView/LobbyFooter"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 17
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_blue")
+disabled = true
+text = "ESPERANDO MÍN. 5 (1/5)"

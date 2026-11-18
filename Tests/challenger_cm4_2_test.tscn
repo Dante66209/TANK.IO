@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Tests/challenger_cm4_2_harness.gd" id="1_challenger"]
+
+[node name="ChallengerTest" type="Node"]
+script = ExtResource("1_challenger")

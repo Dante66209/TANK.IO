@@ -1,0 +1,10 @@
+.git/
+.godot/
+.agents/
+build_web/
+Tests/
+*.zip
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

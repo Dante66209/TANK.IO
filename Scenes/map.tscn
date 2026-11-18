@@ -1,0 +1,1029 @@
+[gd_scene load_steps=29 format=3]
+
+[ext_resource type="Script" path="res://Scripts/World/map.gd" id="1_map_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_north"]
+size = Vector2(6480, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_south"]
+size = Vector2(6480, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_west"]
+size = Vector2(40, 6480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_east"]
+size = Vector2(40, 6480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pillbox"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vert_pillar"]
+size = Vector2(60, 280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_north_center"]
+size = Vector2(60, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_horiz_barricade"]
+size = Vector2(200, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cross_v"]
+size = Vector2(50, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cross_h"]
+size = Vector2(320, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cross_short"]
+size = Vector2(260, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bunker_v"]
+size = Vector2(50, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bunker_h"]
+size = Vector2(300, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bunker_v2"]
+size = Vector2(50, 250)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_cross_v"]
+size = Vector2(40, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_cross_h"]
+size = Vector2(240, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_dorito"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_wall"]
+size = Vector2(180, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_can"]
+size = Vector2(70, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_barrier_cardinal"]
+size = Vector2(260, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gotcha_barrier_cardinal_v"]
+size = Vector2(40, 260)
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_map_script")
+
+[node name="BoundaryWalls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="NorthWall" type="CollisionShape2D" parent="BoundaryWalls"]
+position = Vector2(0, -3220)
+shape = SubResource("RectangleShape2D_north")
+
+[node name="Visual" type="ColorRect" parent="BoundaryWalls/NorthWall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3240.0
+offset_top = -20.0
+offset_right = 3240.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.22, 0.28, 1)
+
+[node name="SouthWall" type="CollisionShape2D" parent="BoundaryWalls"]
+position = Vector2(0, 3220)
+shape = SubResource("RectangleShape2D_south")
+
+[node name="Visual" type="ColorRect" parent="BoundaryWalls/SouthWall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3240.0
+offset_top = -20.0
+offset_right = 3240.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.22, 0.28, 1)
+
+[node name="WestWall" type="CollisionShape2D" parent="BoundaryWalls"]
+position = Vector2(-3220, 0)
+shape = SubResource("RectangleShape2D_west")
+
+[node name="Visual" type="ColorRect" parent="BoundaryWalls/WestWall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -3240.0
+offset_right = 20.0
+offset_bottom = 3240.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.22, 0.28, 1)
+
+[node name="EastWall" type="CollisionShape2D" parent="BoundaryWalls"]
+position = Vector2(3220, 0)
+shape = SubResource("RectangleShape2D_east")
+
+[node name="Visual" type="ColorRect" parent="BoundaryWalls/EastWall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -3240.0
+offset_right = 20.0
+offset_bottom = 3240.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.22, 0.28, 1)
+
+[node name="ModularCovers" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="PillboxNW" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-220, -220)
+shape = SubResource("RectangleShape2D_pillbox")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillboxNW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="PillboxNE" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(220, -220)
+shape = SubResource("RectangleShape2D_pillbox")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillboxNE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="PillboxSW" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-220, 220)
+shape = SubResource("RectangleShape2D_pillbox")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillboxSW"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="PillboxSE" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(220, 220)
+shape = SubResource("RectangleShape2D_pillbox")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillboxSE"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="PillarN1" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-350, -650)
+shape = SubResource("RectangleShape2D_vert_pillar")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillarN1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -140.0
+offset_right = 30.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="PillarN2" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(0, -850)
+shape = SubResource("RectangleShape2D_north_center")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillarN2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -160.0
+offset_right = 30.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="PillarN3" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(350, -650)
+shape = SubResource("RectangleShape2D_vert_pillar")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/PillarN3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -140.0
+offset_right = 30.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="BarricadeN4" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-650, -500)
+shape = SubResource("RectangleShape2D_horiz_barricade")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/BarricadeN4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="BarricadeN5" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(650, -500)
+shape = SubResource("RectangleShape2D_horiz_barricade")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/BarricadeN5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="CrossWallS1" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-300, 600)
+shape = SubResource("RectangleShape2D_cross_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/CrossWallS1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -150.0
+offset_right = 25.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="CrossWallS2" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(300, 600)
+shape = SubResource("RectangleShape2D_cross_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/CrossWallS2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -150.0
+offset_right = 25.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="CrossWallS3" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(0, 750)
+shape = SubResource("RectangleShape2D_cross_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/CrossWallS3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -25.0
+offset_right = 160.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="CrossWallS4" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-550, 850)
+shape = SubResource("RectangleShape2D_cross_short")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/CrossWallS4"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -25.0
+offset_right = 130.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="CrossWallS5" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(550, 850)
+shape = SubResource("RectangleShape2D_cross_short")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/CrossWallS5"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -25.0
+offset_right = 130.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="WestBunkerWall1" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-700, -200)
+shape = SubResource("RectangleShape2D_bunker_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/WestBunkerWall1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -150.0
+offset_right = 25.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="WestBunkerWall2" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-550, -50)
+shape = SubResource("RectangleShape2D_bunker_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/WestBunkerWall2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.0
+offset_right = 150.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="WestBunkerWall3" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-700, 250)
+shape = SubResource("RectangleShape2D_bunker_v2")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/WestBunkerWall3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -125.0
+offset_right = 25.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="EastBunkerWall1" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(700, -200)
+shape = SubResource("RectangleShape2D_bunker_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/EastBunkerWall1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -150.0
+offset_right = 25.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="EastBunkerWall2" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(550, -50)
+shape = SubResource("RectangleShape2D_bunker_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/EastBunkerWall2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.0
+offset_right = 150.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="EastBunkerWall3" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(700, 250)
+shape = SubResource("RectangleShape2D_bunker_v2")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/EastBunkerWall3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -125.0
+offset_right = 25.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="NW_Gotcha_X1_V" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1050, -1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NW_Gotcha_X1_V"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -120.0
+offset_right = 20.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="NW_Gotcha_X1_H" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1050, -1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NW_Gotcha_X1_H"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -20.0
+offset_right = 120.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="NW_Gotcha_Dorito" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-750, -1150)
+shape = SubResource("RectangleShape2D_gotcha_dorito")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NW_Gotcha_Dorito"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="NW_Gotcha_Wall" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1250, -750)
+shape = SubResource("RectangleShape2D_gotcha_wall")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NW_Gotcha_Wall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -20.0
+offset_right = 90.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="NW_Gotcha_Can" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1200, -1200)
+shape = SubResource("RectangleShape2D_gotcha_can")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NW_Gotcha_Can"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32, 0.4, 0.5, 1)
+
+[node name="NE_Gotcha_X2_V" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1050, -1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NE_Gotcha_X2_V"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -120.0
+offset_right = 20.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="NE_Gotcha_X2_H" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1050, -1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NE_Gotcha_X2_H"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -20.0
+offset_right = 120.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="NE_Gotcha_Dorito" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(750, -1150)
+shape = SubResource("RectangleShape2D_gotcha_dorito")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NE_Gotcha_Dorito"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="NE_Gotcha_Wall" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1250, -750)
+shape = SubResource("RectangleShape2D_gotcha_wall")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NE_Gotcha_Wall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -20.0
+offset_right = 90.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="NE_Gotcha_Can" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1200, -1200)
+shape = SubResource("RectangleShape2D_gotcha_can")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/NE_Gotcha_Can"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32, 0.4, 0.5, 1)
+
+[node name="SW_Gotcha_X3_V" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1050, 1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SW_Gotcha_X3_V"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -120.0
+offset_right = 20.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SW_Gotcha_X3_H" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1050, 1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SW_Gotcha_X3_H"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -20.0
+offset_right = 120.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SW_Gotcha_Dorito" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-750, 1150)
+shape = SubResource("RectangleShape2D_gotcha_dorito")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SW_Gotcha_Dorito"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="SW_Gotcha_Wall" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1250, 750)
+shape = SubResource("RectangleShape2D_gotcha_wall")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SW_Gotcha_Wall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -20.0
+offset_right = 90.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SW_Gotcha_Can" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1200, 1200)
+shape = SubResource("RectangleShape2D_gotcha_can")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SW_Gotcha_Can"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32, 0.4, 0.5, 1)
+
+[node name="SE_Gotcha_X4_V" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1050, 1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SE_Gotcha_X4_V"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -120.0
+offset_right = 20.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SE_Gotcha_X4_H" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1050, 1050)
+shape = SubResource("RectangleShape2D_gotcha_cross_h")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SE_Gotcha_X4_H"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -20.0
+offset_right = 120.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SE_Gotcha_Dorito" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(750, 1150)
+shape = SubResource("RectangleShape2D_gotcha_dorito")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SE_Gotcha_Dorito"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3, 0.38, 0.48, 1)
+
+[node name="SE_Gotcha_Wall" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1250, 750)
+shape = SubResource("RectangleShape2D_gotcha_wall")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SE_Gotcha_Wall"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -20.0
+offset_right = 90.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SE_Gotcha_Can" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1200, 1200)
+shape = SubResource("RectangleShape2D_gotcha_can")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/SE_Gotcha_Can"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32, 0.4, 0.5, 1)
+
+[node name="BarrierGotchaNorth" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(0, -1350)
+shape = SubResource("RectangleShape2D_gotcha_barrier_cardinal")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/BarrierGotchaNorth"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -20.0
+offset_right = 130.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="BarrierGotchaSouth" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(0, 1350)
+shape = SubResource("RectangleShape2D_gotcha_barrier_cardinal")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/BarrierGotchaSouth"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -20.0
+offset_right = 130.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="BarrierGotchaWest" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(-1350, 0)
+shape = SubResource("RectangleShape2D_gotcha_barrier_cardinal_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/BarrierGotchaWest"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -130.0
+offset_right = 20.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="BarrierGotchaEast" type="CollisionShape2D" parent="ModularCovers"]
+position = Vector2(1350, 0)
+shape = SubResource("RectangleShape2D_gotcha_barrier_cardinal_v")
+
+[node name="Visual" type="ColorRect" parent="ModularCovers/BarrierGotchaEast"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -130.0
+offset_right = 20.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28, 0.35, 0.44, 1)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Spawn1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1350, -1350)
+
+[node name="Spawn2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1350, -1350)
+
+[node name="Spawn3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1350, 1350)
+
+[node name="Spawn4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1350, 1350)
+
+[node name="Spawn5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, -1050)
+
+[node name="Spawn6" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(0, 1050)
+
+[node name="Spawn7" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1050, 0)
+
+[node name="Spawn8" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(1050, 0)
+
+[node name="Spawn9" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-800, -450)
+
+[node name="Spawn10" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(800, -450)
+
+[node name="Spawn11" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-800, 450)
+
+[node name="Spawn12" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(800, 450)
+
+[node name="PowerUpSpawns" type="Node2D" parent="."]
+
+[node name="PowerUpSpawn1" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(0, 0)
+
+[node name="PowerUpSpawn2" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(0, -500)
+
+[node name="PowerUpSpawn3" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(0, 500)
+
+[node name="PowerUpSpawn4" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(-450, -350)
+
+[node name="PowerUpSpawn5" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(450, -350)
+
+[node name="PowerUpSpawn6" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(-850, -850)
+
+[node name="PowerUpSpawn7" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(850, -850)
+
+[node name="PowerUpSpawn8" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(-850, 850)
+
+[node name="PowerUpSpawn9" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(850, 850)
+
+[node name="PowerUpSpawn10" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(0, -1100)
+
+[node name="PowerUpSpawn11" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(0, 1100)
+
+[node name="PowerUpSpawn12" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(-1100, 0)
+
+[node name="PowerUpSpawn13" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(1100, 0)
+
+[node name="PowerUpSpawn14" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(-700, 600)
+
+[node name="PowerUpSpawn15" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(700, 600)
+
+[node name="PowerUpSpawn16" type="Marker2D" parent="PowerUpSpawns"]
+position = Vector2(0, -350)

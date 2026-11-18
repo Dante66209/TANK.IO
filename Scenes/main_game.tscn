@@ -1,0 +1,236 @@
+[gd_scene format=3 uid="uid://dm3e6ttkxmub2"]
+
+[ext_resource type="Script" uid="uid://bhi4lxgnp3l02" path="res://Scripts/main_game.gd" id="1_main_script"]
+[ext_resource type="PackedScene" path="res://Scenes/map.tscn" id="2_map_scene"]
+[ext_resource type="PackedScene" path="res://Scenes/player_tank.tscn" id="3_player_tank_scene"]
+[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_barrel_scene"]
+[ext_resource type="Script" uid="uid://c3cpu7uoxi25u" path="res://Scripts/Core/spawn_manager.gd" id="5_spawn_script"]
+[ext_resource type="Script" uid="uid://dqu4g0pa7decw" path="res://Scripts/World/fog_of_war.gd" id="6_fow_script"]
+[ext_resource type="Script" uid="uid://d213q6uvvr6ri" path="res://Scripts/Core/match_manager.gd" id="7_mm_script"]
+[ext_resource type="PackedScene" path="res://Scenes/bot_tank.tscn" id="8_bot_scene"]
+[ext_resource type="PackedScene" path="res://Scenes/hud.tscn" id="9_hud_scene"]
+[ext_resource type="PackedScene" path="res://Scenes/podium_screen.tscn" id="10_podium_scene"]
+[ext_resource type="Script" path="res://Scripts/Core/mortar_manager.gd" id="11_mortar_script"]
+[ext_resource type="Script" path="res://Scripts/Core/sound_manager.gd" id="12_sound_script"]
+[ext_resource type="PackedScene" path="res://Scenes/countdown_overlay.tscn" id="13_countdown_scene"]
+[ext_resource type="PackedScene" path="res://Scenes/pause_menu.tscn" id="14_pause_scene"]
+
+[node name="MainGame" type="Node2D" unique_id=1588580138]
+script = ExtResource("1_main_script")
+
+[node name="MatchManager" type="Node" parent="." unique_id=1217811890 groups=["match_manager"]]
+script = ExtResource("7_mm_script")
+
+[node name="SoundManager" type="Node" parent="." unique_id=2319081235 groups=["sound_manager"]]
+script = ExtResource("12_sound_script")
+
+[node name="WorldMap" parent="." unique_id=477956979 groups=["world_map"] instance=ExtResource("2_map_scene")]
+
+[node name="SpawnManager" type="Node2D" parent="." unique_id=2107575052]
+script = ExtResource("5_spawn_script")
+
+[node name="MortarManager" type="Node" parent="." unique_id=2319081234 groups=["mortar_manager"]]
+script = ExtResource("11_mortar_script")
+
+[node name="Entities" type="Node2D" parent="." unique_id=1508758065 groups=["entities"]]
+
+[node name="Tanks" type="Node2D" parent="Entities" unique_id=709004411 groups=["tanks_container"]]
+
+[node name="PlayerTank" parent="Entities/Tanks" unique_id=1018529786 instance=ExtResource("3_player_tank_scene")]
+
+[node name="BotTank1" parent="Entities/Tanks" unique_id=1326209158 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Alpha"
+
+[node name="BotTank2" parent="Entities/Tanks" unique_id=864626019 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Bravo"
+
+[node name="BotTank3" parent="Entities/Tanks" unique_id=1375982407 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Charlie"
+
+[node name="BotTank4" parent="Entities/Tanks" unique_id=903111306 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Delta"
+
+[node name="BotTank5" parent="Entities/Tanks" unique_id=903111307 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Echo"
+
+[node name="BotTank6" parent="Entities/Tanks" unique_id=903111308 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Foxtrot"
+
+[node name="BotTank7" parent="Entities/Tanks" unique_id=903111309 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Golf"
+
+[node name="BotTank8" parent="Entities/Tanks" unique_id=903111310 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot Hotel"
+
+[node name="BotTank9" parent="Entities/Tanks" unique_id=903111311 instance=ExtResource("8_bot_scene")]
+bot_state = 0
+tank_name = "Bot India"
+
+[node name="Projectiles" type="Node2D" parent="Entities" unique_id=795119097 groups=["projectiles"]]
+
+[node name="Barrels" type="Node2D" parent="Entities" unique_id=751923780 groups=["barrels_container"]]
+
+[node name="Barrel1" parent="Entities/Barrels" unique_id=590151135 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-175, -650)
+
+[node name="Barrel2" parent="Entities/Barrels" unique_id=199275932 instance=ExtResource("4_barrel_scene")]
+position = Vector2(175, -650)
+
+[node name="Barrel3" parent="Entities/Barrels" unique_id=1900500075 instance=ExtResource("4_barrel_scene")]
+position = Vector2(0, -260)
+
+[node name="Barrel4" parent="Entities/Barrels" unique_id=808989932 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-550, 120)
+
+[node name="Barrel5" parent="Entities/Barrels" unique_id=770042671 instance=ExtResource("4_barrel_scene")]
+position = Vector2(550, 120)
+
+[node name="Barrel6" parent="Entities/Barrels" unique_id=507394497 instance=ExtResource("4_barrel_scene")]
+position = Vector2(0, 600)
+
+[node name="Barrel7" parent="Entities/Barrels" unique_id=863278411 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-425, 750)
+
+[node name="Barrel8" parent="Entities/Barrels" unique_id=305611742 instance=ExtResource("4_barrel_scene")]
+position = Vector2(425, 750)
+
+[node name="Barrel9" parent="Entities/Barrels" unique_id=305611743 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1750, -1750)
+
+[node name="Barrel10" parent="Entities/Barrels" unique_id=305611744 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1750, -1750)
+
+[node name="Barrel11" parent="Entities/Barrels" unique_id=305611745 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1750, 1750)
+
+[node name="Barrel12" parent="Entities/Barrels" unique_id=305611746 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1750, 1750)
+
+[node name="Barrel13" parent="Entities/Barrels" unique_id=305611747 instance=ExtResource("4_barrel_scene")]
+position = Vector2(0, -2000)
+
+[node name="Barrel14" parent="Entities/Barrels" unique_id=305611748 instance=ExtResource("4_barrel_scene")]
+position = Vector2(0, 2000)
+
+[node name="Barrel15" parent="Entities/Barrels" unique_id=305611749 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2000, 0)
+
+[node name="Barrel16" parent="Entities/Barrels" unique_id=305611750 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2000, 0)
+
+[node name="Barrel17" parent="Entities/Barrels" unique_id=305611751 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1020, -2480)
+
+[node name="Barrel18" parent="Entities/Barrels" unique_id=305611752 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1020, -2480)
+
+[node name="Barrel19" parent="Entities/Barrels" unique_id=305611753 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1020, 2480)
+
+[node name="Barrel20" parent="Entities/Barrels" unique_id=305611754 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1020, 2480)
+
+[node name="Barrel21" parent="Entities/Barrels" unique_id=305611755 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2480, -1020)
+
+[node name="Barrel22" parent="Entities/Barrels" unique_id=305611756 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2480, -1020)
+
+[node name="Barrel23" parent="Entities/Barrels" unique_id=305611757 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2480, 1020)
+
+[node name="Barrel24" parent="Entities/Barrels" unique_id=305611758 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2480, 1020)
+
+[node name="Barrel25" parent="Entities/Barrels" unique_id=305611759 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-920, -750)
+
+[node name="Barrel26" parent="Entities/Barrels" unique_id=305611760 instance=ExtResource("4_barrel_scene")]
+position = Vector2(920, -750)
+
+[node name="Barrel27" parent="Entities/Barrels" unique_id=305611761 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-920, 750)
+
+[node name="Barrel28" parent="Entities/Barrels" unique_id=305611762 instance=ExtResource("4_barrel_scene")]
+position = Vector2(920, 750)
+
+[node name="Barrel29" parent="Entities/Barrels" unique_id=305611763 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1500, -1150)
+
+[node name="Barrel30" parent="Entities/Barrels" unique_id=305611764 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1500, -1150)
+
+[node name="Barrel31" parent="Entities/Barrels" unique_id=305611765 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1500, 1150)
+
+[node name="Barrel32" parent="Entities/Barrels" unique_id=305611766 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1500, 1150)
+
+[node name="Barrel33" parent="Entities/Barrels" unique_id=305611767 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-380, -2180)
+
+[node name="Barrel34" parent="Entities/Barrels" unique_id=305611768 instance=ExtResource("4_barrel_scene")]
+position = Vector2(380, -2180)
+
+[node name="Barrel35" parent="Entities/Barrels" unique_id=305611769 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-380, 2180)
+
+[node name="Barrel36" parent="Entities/Barrels" unique_id=305611770 instance=ExtResource("4_barrel_scene")]
+position = Vector2(380, 2180)
+
+[node name="Barrel37" parent="Entities/Barrels" unique_id=305611771 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2180, -380)
+
+[node name="Barrel38" parent="Entities/Barrels" unique_id=305611772 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2180, -380)
+
+[node name="Barrel39" parent="Entities/Barrels" unique_id=305611773 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2180, 380)
+
+[node name="Barrel40" parent="Entities/Barrels" unique_id=305611774 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2180, 380)
+
+[node name="Barrel41" parent="Entities/Barrels" unique_id=305611775 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1500, -1900)
+
+[node name="Barrel42" parent="Entities/Barrels" unique_id=305611776 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1500, -1900)
+
+[node name="Barrel43" parent="Entities/Barrels" unique_id=305611777 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-1500, 1900)
+
+[node name="Barrel44" parent="Entities/Barrels" unique_id=305611778 instance=ExtResource("4_barrel_scene")]
+position = Vector2(1500, 1900)
+
+[node name="Barrel45" parent="Entities/Barrels" unique_id=305611779 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2350, -2650)
+
+[node name="Barrel46" parent="Entities/Barrels" unique_id=305611780 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2350, -2650)
+
+[node name="Barrel47" parent="Entities/Barrels" unique_id=305611781 instance=ExtResource("4_barrel_scene")]
+position = Vector2(-2350, 2650)
+
+[node name="Barrel48" parent="Entities/Barrels" unique_id=305611782 instance=ExtResource("4_barrel_scene")]
+position = Vector2(2350, 2650)
+
+[node name="PowerUps" type="Node2D" parent="Entities" unique_id=347602272 groups=["powerups_container"]]
+
+[node name="FogOfWar" type="CanvasLayer" parent="." unique_id=1839387369]
+script = ExtResource("6_fow_script")
+
+[node name="HUD" parent="." unique_id=403105915 instance=ExtResource("9_hud_scene")]
+
+[node name="PodiumScreen" parent="." unique_id=1011115981 instance=ExtResource("10_podium_scene")]
+
+[node name="CountdownOverlay" parent="." instance=ExtResource("13_countdown_scene")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("14_pause_scene")]
